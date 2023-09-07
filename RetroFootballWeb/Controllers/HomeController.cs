@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RetroFootballWeb.Models;
+using RetroFootballWeb.Repository;
 using System.Diagnostics;
 
 namespace RetroFootballWeb.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly DataContext _context;
 		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, DataContext context)
 		{
 			_logger = logger;
+			_context = context;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+			var products = _context.Products.ToList();
+			return View(products);
 		}
 
 		public IActionResult Privacy()

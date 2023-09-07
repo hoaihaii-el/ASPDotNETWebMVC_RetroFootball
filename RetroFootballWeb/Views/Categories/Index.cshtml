@@ -1,5 +1,78 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Product>
+<div class="container-fluid">
+    <div class="row" id="middle-category">
+        <!--Categories-->
+        <div class="col-md-3 pl-xl-5">
+            <a asp-action="Index" asp-controller="Categories" asp-route-type="" asp-route-value="" class="nav-item nav-link">All products</a>
+            <!--Club-->
+            <div>
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                    <h6 class="m-0">Club</h6>
+                </a>
+                @await Component.InvokeAsync("Categories", new {type = "Club"})
+            </div>
+            <!--Club-->
+            <!--Nation-->
+            <div>
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                    <h6 class="m-0">Nation</h6>
+                </a>
+                @await Component.InvokeAsync("Categories", new {type = "Nation"})
+            </div>
+            <!--Nation-->
+            <!--Season-->
+            <div>
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                    <h6 class="m-0">Season</h6>
+                </a>
+                @await Component.InvokeAsync("Categories", new {type = "Season"})
+            </div>
+            <!--Season-->
+        </div>
+        <!--Categories-->
+        <div class="col-md-9">
+            <div class="row px-xl-5 pb-3">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            <a>
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100" src=@product.Image alt="">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">@product.Name</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>$@product.Price</h6>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Lưu vị trí trang hiện tại trước khi nạp lại
+    window.addEventListener('beforeunload', function () {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Sau khi trang đã tải lại, kiểm tra và cuộn trang đến vị trí đã lưu
+    window.addEventListener('load', function () {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
+</script>
+
+
+
+
