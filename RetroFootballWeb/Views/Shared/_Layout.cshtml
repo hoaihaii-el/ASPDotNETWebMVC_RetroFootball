@@ -105,14 +105,13 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="" class="nav-item nav-link active">Home</a>
-                            <a href="" class="nav-item nav-link">Categories</a>
-                            <a href="" class="nav-item nav-link">Profile</a>
-                            <a href="" class="nav-item nav-link">Contact</a>
+                            <a asp-action="Index" asp-controller="Home" class="nav-item nav-link active">Home</a>
+                            <a asp-action="Index" asp-controller="Categories" class="nav-item nav-link">Categories</a>
+                            <a asp-action="Index" asp-controller="Profile" class="nav-item nav-link">Profile</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Login</a>
+                            <a asp-action="Register" asp-controller="Login" class="nav-item nav-link">Register</a>
                         </div>
                     </div>
                 </nav>
