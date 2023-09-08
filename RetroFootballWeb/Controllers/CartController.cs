@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
@@ -34,36 +35,44 @@ namespace RetroFootballWeb.Controllers
         }
         public IActionResult AddToCart(string productID, string customerID, int quantity = 1, string size = "")
         {
-            var product = _context.Products.FirstOrDefault(p => p.ID == productID);
-            if (String.IsNullOrEmpty(size))
+            try
             {
-                if (product.Size_s > 0) size = "S";
-                else
-                if (product.Size_m > 0) size = "M";
-                else
-                if (product.Size_l > 0) size = "L";
-                else
-                    size = "XL";
-            }
-            var item = _context.Carts.FirstOrDefault(c => c.ProductId == productID && c.CustomerId == customerID && c.Size == size);
-            if (item != null)
-            {
-                item.Quantity += quantity;
-            }
-            else
-            {
-                var cartItem = new Cart
+                var product = _context.Products.FirstOrDefault(p => p.ID == productID);
+                if (String.IsNullOrEmpty(size))
                 {
-                    ProductId = productID,
-                    CustomerId = customerID,
-                    Quantity = quantity,
-                    Size = size
-                };
-                _context.Carts.Add(cartItem);
-            }
-            _context.SaveChanges();
+                    if (product.Size_s > 0) size = "S";
+                    else
+                    if (product.Size_m > 0) size = "M";
+                    else
+                    if (product.Size_l > 0) size = "L";
+                    else
+                        size = "XL";
+                }
+                var item = _context.Carts.FirstOrDefault(c => c.ProductId == productID && c.CustomerId == customerID && c.Size == size);
+                if (item != null)
+                {
+                    item.Quantity += quantity;
+                }
+                else
+                {
+                    var cartItem = new Cart
+                    {
+                        ProductId = productID,
+                        CustomerId = customerID,
+                        Quantity = quantity,
+                        Size = size
+                    };
+                    _context.Carts.Add(cartItem);
+                }
+                _context.SaveChanges();
 
-            return Ok("Add to cart successfully!");
+                TempData["SuccessMessage"] = "Add to cart successfully!";
+            }
+            catch(Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
