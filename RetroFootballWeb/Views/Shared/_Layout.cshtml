@@ -249,3 +249,17 @@
         });
     </script>
 }
+<script>
+    // Lưu vị trí trang hiện tại trước khi nạp lại
+    window.addEventListener('beforeunload', function () {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Sau khi trang đã tải lại, kiểm tra và cuộn trang đến vị trí đã lưu
+    window.addEventListener('load', function () {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
+</script>

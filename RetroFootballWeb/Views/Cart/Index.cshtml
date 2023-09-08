@@ -26,20 +26,20 @@
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
+                                        <a asp-action="Decrease" asp-controller="Cart" asp-route-customerID="user1" asp-route-productID="@cart.productID" asp-route-size="@cart.Size" class="btn btn-sm btn-primary btn-minus">
                                             <i class="fa fa-minus"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                     <input type="text" class="form-control form-control-sm bg-secondary text-center" value="@cart.Quantity">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                        <a asp-action="Increase" asp-controller="Cart" asp-route-customerID="user1" asp-route-productID="@cart.productID" asp-route-size="@cart.Size" class="btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
                             <td class="align-middle">$@cart.Total</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle"><a asp-action="Remove" asp-controller="Cart" asp-route-customerID="user1" asp-route-productID="@cart.productID" asp-route-size="@cart.Size" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                         </tr>
                     }
                 </tbody>
