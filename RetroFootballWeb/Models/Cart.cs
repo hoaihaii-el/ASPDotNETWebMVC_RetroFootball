@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RetroFootballWeb.Repository;
+using System.ComponentModel.DataAnnotations;
 
 namespace RetroFootballWeb.Models
 {
@@ -9,6 +10,8 @@ namespace RetroFootballWeb.Models
 
         [Key]
         public string ProductId { get; set; }
+        [Key]
+        public string Size { get; set; }
 
         [Required]
         public int Quantity { get; set; }

@@ -18,7 +18,7 @@ namespace RetroFootballWeb.Repository
         public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cart>().HasKey(c => new { c.CustomerId, c.ProductId });
+            modelBuilder.Entity<Cart>().HasKey(c => new { c.CustomerId, c.ProductId, c.Size });
             modelBuilder.Entity<WishList>().HasKey(w => new { w.CustomerId, w.ProductId });
             modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderID, o.CustomerID });
             modelBuilder.Entity<DeliveryInfo>().HasKey(d => new { d.CustomerID, d.Priority });
