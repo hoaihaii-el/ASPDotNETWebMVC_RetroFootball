@@ -48,7 +48,7 @@
                                 </div>
                             </a>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary mr-1"></i>Wish List</a>
+                                <a asp-action="AddToWishList" asp-controller="WishList" asp-route-customerID="user1" asp-route-productID="@product.ID" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary mr-1"></i>Wish List</a>
                                 <a asp-action="AddToCart" asp-controller="Cart" asp-route-productID="@product.ID" asp-route-customerID="user1" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                             </div>
                         </div>

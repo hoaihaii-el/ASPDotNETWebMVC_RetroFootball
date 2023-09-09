@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<WishList>
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Wish List</span></h2>
+    </div>
+    <div class="row px-xl-5 pb-3">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="card product-item border-0 mb-4">
+                    <a asp-action="Detail" asp-controller="Product" asp-route-productID="@item.ProductId">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="~/img/Celtic Home 9192_thumb.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">@item.Product.Name</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$@item.Product.Price</h6>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a asp-action="AddToCart" asp-controller="Cart" asp-route-productID="@item.ProductId" asp-route-customerID="user1" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        <a asp-action="Remove" asp-controller="WishList" asp-route-customerID="user1" asp-route-productID="@item.ProductId" class="btn btn-sm text-dark p-0"><i class="fas fa-times text-primary mr-1"></i>Remove</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

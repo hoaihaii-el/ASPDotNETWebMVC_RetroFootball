@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
-using System.Security.Cryptography.Xml;
 
 namespace RetroFootballWeb.Controllers
 {
