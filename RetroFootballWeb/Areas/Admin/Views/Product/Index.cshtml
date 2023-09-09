@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Product>
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Manage Product</span></h2>
+    </div>
+    <a asp-action="Add" asp-controller="Product" class="btn border bg-secondary m-3">
+        <i class="fas fa-plus text-primary"></i>
+        <span>New Product</span>
+    </a>
+    <div class="col-lg-12 table-responsive mb-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Club</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">S</th>
+                    <th scope="col">M</th>
+                    <th scope="col">L</th>
+                    <th scope="col">XL</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Image</th>
+                    <th width="350" scope="col">Description</th>
+                    <th scope="col">Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Club</td>
+                        <td>$@product.Price</td>
+                        <td>@product.Size_s</td>
+                        <td>@product.Size_m</td>
+                        <td>@product.Size_l</td>
+                        <td>@product.Size_xl</td>
+                        <td>@product.Status</td>
+                        <td><img src="~/img/products/@product.Image" width="50"></td>
+                        <td>@product.Description</td>
+                        <td>
+                            <a asp-area="Admin" asp-action="Edit" asp-controller="Product" asp-route-productID="@product.ID" class="btn border bg-secondary">
+                                <i class="fas fa-edit text-primary"></i>
+                            </a>
+                            <a asp-area="Admin" asp-action="Delete" asp-controller="Product" asp-route-productID="@product.ID" class="btn border bg-secondary">
+                                <i class="fas fa-times text-primary"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

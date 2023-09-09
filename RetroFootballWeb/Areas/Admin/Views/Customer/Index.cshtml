@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Customer>
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Manage Product</span></h2>
+    </div>
+    <a asp-action="Add" asp-controller="Customer" class="btn border bg-secondary m-3">
+        <i class="fas fa-plus text-primary"></i>
+        <span>New Customer</span>
+    </a>
+    <div class="col-lg-12 table-responsive mb-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.ID</td>
+                        <td>@customer.Name</td>
+                        <td>$@customer.Password</td>
+                        <td>@customer.Role</td>
+                        <td>
+                            <a asp-area="Admin" asp-action="Edit" asp-controller="Customer" asp-route-customerID="@customer.ID" class="btn border bg-secondary">
+                                <i class="fas fa-edit text-primary"></i>
+                            </a>
+                            <a asp-area="Admin" asp-action="Delete" asp-controller="Customer" asp-route-customerID="@customer.ID" class="btn border bg-secondary">
+                                <i class="fas fa-times text-primary"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

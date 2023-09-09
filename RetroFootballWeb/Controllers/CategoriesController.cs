@@ -13,6 +13,7 @@ namespace RetroFootballWeb.Controllers
         }
         public async Task<IActionResult> Index(string type = "", string value = "")
         {
+            ViewData["Active"] = "Categories";
             if (type == "Club")
             {
                 return View(await _context.Products

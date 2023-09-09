@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RetroFootballWeb.Models
 {
@@ -20,5 +21,8 @@ namespace RetroFootballWeb.Models
         public DateTime Time_added { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        [NotMapped]
+        [FileExtensions]
+        public IFormFile ImageUpLoad { get; set; }
     }
 }

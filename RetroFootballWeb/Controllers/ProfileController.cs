@@ -6,6 +6,7 @@ namespace RetroFootballWeb.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Active"] = "Profile";
             return View();
         }
     }

@@ -20,7 +20,7 @@
                     @foreach (var cart in Model)
                     {
                         <tr>
-                            <td class="align-middle"><img src="~/img/Celtic Home 9192_thumb.jpg" alt="" style="width: 50px;"> @cart.productName</td>
+                            <td class="align-middle"><img src="~/img/@cart.Image" alt="" style="width: 50px;"> @cart.productName</td>
                             <td class="align-middle">$@cart.Price</td>
                             <td class="align-middle">@cart.Size</td>
                             <td class="align-middle">

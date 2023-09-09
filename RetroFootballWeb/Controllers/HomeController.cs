@@ -18,6 +18,8 @@ namespace RetroFootballWeb.Controllers
 
 		public IActionResult Index()
 		{
+			ViewData["Active"] = "Home";
+
 			var products = _context.Products.ToList();
 			return View(products);
 		}

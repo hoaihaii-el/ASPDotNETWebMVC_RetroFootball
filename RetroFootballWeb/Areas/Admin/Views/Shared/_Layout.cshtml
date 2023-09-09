@@ -1,0 +1,177 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Retro Football</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-9 d-none d-lg-block">
+                <a class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Retro Football</span>Admin Area</h1>
+                </a>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            @if (ViewData["Active"] == null)
+                            {
+                                <a asp-action="Index" asp-controller="Product" class="nav-item nav-link">Products</a>
+                                <a asp-action="Index" asp-controller="Customer" class="nav-item nav-link">Customers</a>
+                                <a class="nav-item nav-link">Orders</a>
+                            }
+                            else
+                            {
+                                @if (ViewData["Active"] == "Product")
+                                {
+                                    <a asp-action="Index" asp-controller="Product" class="nav-item nav-link active">Products</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Index" asp-controller="Product" class="nav-item nav-link">Products</a>
+                                }
+                                @if (ViewData["Active"] == "Customer")
+                                {
+                                    <a asp-action="Index" asp-controller="Customer" class="nav-item nav-link active">Customers</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Index" asp-controller="Customer" class="nav-item nav-link">Customers</a>
+                                }
+                                @if (ViewData["Active"] == "Order")
+                                {
+                                    <a asp-action="Index" asp-controller="Profile" class="nav-item nav-link active">Orders</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Index" asp-controller="Profile" class="nav-item nav-link">Orders</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    <div class="row">
+        <!--Pop-up Message-->
+        <div class="modal" tabindex="-1" id="myMessage">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Notification</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="myMessageBody" class="modal-body">
+                        <p>@TempData["SuccessMessage"]</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Pop-up Message-->
+        @RenderBody()
+    </div>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/easing/easing.min.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false);
+</body>
+
+</html>
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#myMessage').modal('show');
+        });
+    </script>
+}
+<script>
+    // Lưu vị trí trang hiện tại trước khi nạp lại
+    window.addEventListener('beforeunload', function () {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Sau khi trang đã tải lại, kiểm tra và cuộn trang đến vị trí đã lưu
+    window.addEventListener('load', function () {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
+</script>
