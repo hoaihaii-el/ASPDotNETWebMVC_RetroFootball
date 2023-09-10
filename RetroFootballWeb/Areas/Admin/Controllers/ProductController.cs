@@ -86,6 +86,11 @@ namespace RetroFootballWeb.Areas.Admin.Controllers
                         fs.Close();
                         product.Image = imageName;
                     }
+                    else product.Image = await _context.Products.Where(p => p.ID == product.ID)
+                            .Select(p => p.Image).FirstOrDefaultAsync();
+
+                    product.Status = await _context.Products.Where(p => p.ID == product.ID)
+                            .Select(p => p.Status).FirstOrDefaultAsync();
 
                     _context.Update(product);
                     await _context.SaveChangesAsync();

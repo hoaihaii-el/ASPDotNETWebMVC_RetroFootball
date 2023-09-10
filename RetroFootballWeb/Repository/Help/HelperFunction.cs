@@ -41,8 +41,6 @@ namespace RetroFootballWeb.Repository.Help
             if (String.IsNullOrEmpty(product.Club)) return false;
             if (String.IsNullOrEmpty(product.Season)) return false;
             if (String.IsNullOrEmpty(product.Nation)) return false;
-            if (String.IsNullOrEmpty(product.Image)) return false;
-            if (String.IsNullOrEmpty(product.Status)) return false;
             if (product.Price <= 0 || product.Size_s < 0 || product.Size_m < 0 || product.Size_l < 0 || product.Size_xl < 0) return false;
             return true;
         }

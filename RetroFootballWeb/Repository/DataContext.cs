@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RetroFootballWeb.Models;
 
 namespace RetroFootballWeb.Repository
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
         {
@@ -20,8 +21,9 @@ namespace RetroFootballWeb.Repository
         {
             modelBuilder.Entity<Cart>().HasKey(c => new { c.CustomerId, c.ProductId, c.Size });
             modelBuilder.Entity<WishList>().HasKey(w => new { w.CustomerId, w.ProductId });
-            modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderID, o.CustomerID });
+            modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderID, o.ProductID, o.Size });
             modelBuilder.Entity<DeliveryInfo>().HasKey(d => new { d.CustomerID, d.Priority });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

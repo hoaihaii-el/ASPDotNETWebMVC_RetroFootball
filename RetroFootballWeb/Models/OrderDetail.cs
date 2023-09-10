@@ -7,10 +7,12 @@ namespace RetroFootballWeb.Models
         [Key]
         public int OrderID { get; set; }
         [Key]
-        public string CustomerID { get; set; }
+        public string ProductID { get; set; }
+        [Key]
+        public string Size { get; set; }
         public int Quantity { get; set; }
 
         public Order Order { get; set; }
-        public Customer Customer { get; set; }
+        public Product Product { get; set; }
     }
 }

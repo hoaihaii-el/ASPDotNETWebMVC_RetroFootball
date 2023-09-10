@@ -7,7 +7,7 @@ namespace RetroFootballWeb.Models
     {
         [Key]
         public int ID { get; set; }
-        public Customer Customer { get; set; }
+        public string CustomerID { get; set; }
         [Required]
         public DateTime Time_create { get; set; }
         [Required]
@@ -21,5 +21,6 @@ namespace RetroFootballWeb.Models
         [Required]
         public string Status { get; set; }
         public string Note { get; set; }
+        public Customer Customer { get; set; }
     }
 }
