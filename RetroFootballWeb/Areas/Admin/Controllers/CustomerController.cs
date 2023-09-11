@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
+using System.Data;
 
 namespace RetroFootballWeb.Areas.Admin.Controllers
 {

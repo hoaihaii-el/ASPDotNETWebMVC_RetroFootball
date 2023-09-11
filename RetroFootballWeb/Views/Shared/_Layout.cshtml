@@ -65,28 +65,31 @@
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+            @if (ViewData["Active"] != "Login")
+            {
+                <div class="col-lg-6 col-6 text-left">
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for products">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-transparent text-primary">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a asp-action="Index" asp-controller="WishList" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span>Wishlist</span>
-                </a>
-                <a asp-action="Index" asp-controller="Cart" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span>Cart</span>
-                </a>
-            </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-6 text-right">
+                    <a asp-action="Index" asp-controller="WishList" class="btn border">
+                        <i class="fas fa-heart text-primary"></i>
+                        <span>Wishlist</span>
+                    </a>
+                    <a asp-action="Index" asp-controller="Cart" class="btn border">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span>Cart</span>
+                    </a>
+                </div>
+            }
         </div>
     </div>
     <!-- Topbar End -->
@@ -137,9 +140,12 @@
                                 }
                             }
                         </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Logout</a>
-                        </div>
+                        @if (ViewData["Active"] != "Login")
+                        {
+                            <div class="navbar-nav ml-auto py-0">
+                                <a asp-action="Index" asp-controller="Login" class="nav-item nav-link">Logout</a>
+                            </div>
+                        }
                     </div>
                 </nav>
             </div>
@@ -232,6 +238,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/easing/easing.min.js"></script>
     <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false);
 
     <!-- Template Javascript -->
     <script src="~/js/main.js"></script>

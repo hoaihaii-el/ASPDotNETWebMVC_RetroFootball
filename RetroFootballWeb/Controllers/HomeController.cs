@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
 using System.Diagnostics;
 
 namespace RetroFootballWeb.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
 	{
 		private readonly DataContext _context;
 		private readonly ILogger<HomeController> _logger;
