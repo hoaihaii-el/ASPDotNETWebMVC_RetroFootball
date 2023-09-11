@@ -67,6 +67,7 @@ namespace RetroFootballWeb.Controllers
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User user)
         {
@@ -91,7 +92,6 @@ namespace RetroFootballWeb.Controllers
             }
             return RedirectToAction("Login");
         }
-
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

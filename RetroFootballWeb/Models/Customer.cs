@@ -6,11 +6,8 @@ namespace RetroFootballWeb.Models
     {
         [Key]
         public string ID { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        public string Role { get; set; }
+        public string Phone { get; set; }
+        public bool Male { get; set; }
     }
 }
