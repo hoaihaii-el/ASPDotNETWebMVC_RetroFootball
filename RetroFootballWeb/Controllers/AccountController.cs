@@ -12,10 +12,12 @@ namespace RetroFootballWeb.Controllers
         // Register service manage user and signin
         private UserManager<AppUser> _userManage;
         private SignInManager<AppUser> _signInManager;
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManage)
+        private readonly DataContext _context;
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManage, DataContext context)
         {
             _signInManager = signInManager;
             _userManage = userManage;
+            _context = context;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -83,6 +85,14 @@ namespace RetroFootballWeb.Controllers
                 {
                     TempData["SuccessMessage"] = "Register successfully!";
                     await _userManage.AddToRoleAsync(newUser, "User");
+
+                    var userCreate = await _userManage.FindByEmailAsync(user.Email);
+                    var customer = new Customer
+                    {
+                        ID = userCreate.Id
+                    };
+                    _context.Customers.Add(customer);
+                    await _context.SaveChangesAsync();
                 }
                 else
                     foreach (IdentityError error in result.Errors)
