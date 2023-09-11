@@ -12,14 +12,13 @@ builder.Services.AddDbContext<DataContext>(options =>
 	options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectedDb"]);
 });
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
 // Configure Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

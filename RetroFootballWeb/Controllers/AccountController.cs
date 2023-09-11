@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RetroFootballWeb.Models.ViewModels;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RetroFootballWeb.Controllers
 {
@@ -17,7 +18,8 @@ namespace RetroFootballWeb.Controllers
             _userManage = userManage;
         }
         [HttpGet]
-        public async Task<IActionResult> Login()
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(string returnURL)
         {
             ViewData["Active"] = "Login";
 
@@ -36,9 +38,10 @@ namespace RetroFootballWeb.Controllers
 
                 await _userManage.AddToRoleAsync(user, "Admin");
             }
-            return View();
+            return View(new LoginViewModel { ReturnURL = returnURL });
         }
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel login)
         {
@@ -53,7 +56,7 @@ namespace RetroFootballWeb.Controllers
                         return Redirect("~/Admin");
                     }
                     else
-                        return Redirect("~/Home");
+                        return Redirect("~/Home/Index");
                 }
                 ModelState.AddModelError("", "Invalid username or password!");
             }
@@ -86,14 +89,14 @@ namespace RetroFootballWeb.Controllers
                         ModelState.AddModelError("", error.Description);
                     }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("Login", "Account");
+            return Redirect("Account/Login");
         }
     }
 }
