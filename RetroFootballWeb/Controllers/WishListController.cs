@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RetroFootballWeb.Models;
@@ -9,12 +10,18 @@ namespace RetroFootballWeb.Controllers
     public class WishListController : Controller
     {
         private readonly DataContext _context;
-        public WishListController(DataContext context)
+        private UserManager<AppUser> _userManager;
+        public WishListController(DataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-        public async Task<IActionResult> Index(string customerID = "user1")
+        public async Task<IActionResult> Index()
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var wishLists = await _context.WishLists.Where(w => w.CustomerId == customerID).ToListAsync();
 
             foreach (var item in wishLists)
@@ -25,8 +32,12 @@ namespace RetroFootballWeb.Controllers
 
             return View(wishLists);
         }
-        public async Task<IActionResult> AddToWishList(string customerID, string productID)
+        public async Task<IActionResult> AddToWishList(string productID)
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var item = await _context.WishLists.FindAsync(customerID, productID);
 
             if (item != null)
@@ -51,8 +62,12 @@ namespace RetroFootballWeb.Controllers
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
-        public async Task<IActionResult> Remove(string customerID, string productID)
+        public async Task<IActionResult> Remove(string productID)
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var item = await _context.WishLists.FindAsync(customerID, productID);
             if (item != null)
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RetroFootballWeb.Models;
 using RetroFootballWeb.Repository;
@@ -8,14 +9,20 @@ namespace RetroFootballWeb.Controllers
     public class CartController : Controller
     {
         private readonly DataContext _context;
-        public CartController(DataContext context)
+        private UserManager<AppUser> _userManager;
+        public CartController(DataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-        public IActionResult Index(string customerID = "user1")
+        public async Task<IActionResult> Index()
         {
             decimal subTotal = 0;
             List<CartItem> mainCarts = new List<CartItem>();
+
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
 
             var cartItems = _context.Carts
             .Where(cart => cart.CustomerId == customerID)
@@ -31,10 +38,14 @@ namespace RetroFootballWeb.Controllers
             ViewData["Total"] = subTotal + 10;
             return View(mainCarts);
         }
-        public async Task<IActionResult> AddToCart(string productID, string customerID, int quantity = 1, string size = "")
+        public async Task<IActionResult> AddToCart(string productID, int quantity = 1, string size = "")
         {
             try
             {
+                // Get info user authenticated
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                string customerID = user.Id;
+
                 var product = await _context.Products.FindAsync(productID);
                 if (String.IsNullOrEmpty(size))
                 {
@@ -72,8 +83,12 @@ namespace RetroFootballWeb.Controllers
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
-        public async Task<IActionResult> Increase(string customerID, string productID, string size)
+        public async Task<IActionResult> Increase(string productID, string size)
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var cart = await _context.Carts.FindAsync(customerID, productID, size);
             if (cart != null)
             {
@@ -82,18 +97,27 @@ namespace RetroFootballWeb.Controllers
             }
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Decrease(string customerID, string productID, string size)
+        public async Task<IActionResult> Decrease(string productID, string size)
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var cart = await _context.Carts.FindAsync(customerID, productID, size);
             if (cart != null)
             {
+                if (cart.Quantity <= 1) return RedirectToAction("Index");
                 cart.Quantity--;
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Remove(string customerID, string productID, string size)
+        public async Task<IActionResult> Remove(string productID, string size)
         {
+            // Get info user authenticated
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            string customerID = user.Id;
+
             var cart = await _context.Carts.FindAsync(customerID, productID, size);
             if (cart != null)
             {
