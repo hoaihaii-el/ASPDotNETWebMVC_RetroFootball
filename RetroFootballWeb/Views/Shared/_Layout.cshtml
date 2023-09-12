@@ -61,20 +61,18 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
             @if (ViewData["Active"] != "Login")
             {
                 <div class="col-lg-6 col-6 text-left">
-                    <form action="">
+                    <form asp-controller="Search" asp-action="Index">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
+                            <input type="text" class="form-control" name="search" placeholder="Search for products">
                             <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <i class="fa fa-search"></i>
-                                </span>
+                                <input class="btn btn-secondary" type="submit" value="Search" />
                             </div>
                         </div>
                     </form>
@@ -111,6 +109,7 @@
                                 <a asp-action="Index" asp-controller="Home" class="nav-item nav-link">Home</a>
                                 <a asp-action="Index" asp-controller="Categories" class="nav-item nav-link">Categories</a>
                                 <a asp-action="Index" asp-controller="Profile" class="nav-item nav-link">Profile</a>
+                                <a asp-action="Index" asp-controller="YourOrders" class="nav-item nav-link">Your Orders</a>
                             }
                             else
                             {
@@ -137,6 +136,14 @@
                                 else
                                 {
                                     <a asp-action="Index" asp-controller="Profile" class="nav-item nav-link">Profile</a>
+                                }
+                                @if (ViewData["Active"] == "YourOrders")
+                                {
+                                    <a asp-action="Index" asp-controller="YourOrders" class="nav-item nav-link active">Your Orders</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Index" asp-controller="YourOrders" class="nav-item nav-link">Your Orders</a>
                                 }
                             }
                         </div>

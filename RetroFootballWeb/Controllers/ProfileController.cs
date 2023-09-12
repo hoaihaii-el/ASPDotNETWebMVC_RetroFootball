@@ -111,6 +111,12 @@ namespace RetroFootballWeb.Controllers
         {
             var info = await _context.DeliveryInfos.FindAsync(customerID, priority);
 
+            if (info.Priority == 1)
+            {
+                TempData["SuccesMessage"] = "Please change the default address before delete!";
+                return RedirectToAction("DetailAddress");
+            }
+
             _context.DeliveryInfos.Remove(info);
             await _context.SaveChangesAsync();
 
